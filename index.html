@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Balay Nam-ay TV Welcome</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=swap"
+    />
+    <link rel="stylesheet" href="hark.css" />
+    <link rel="stylesheet" href="hark-hero.css" />
+    <style>
+      /* The viewport is only a letterbox; everything lives on a fixed 1920x1080 stage scaled to fit. */
+      html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background: #211a15; }
+      .x-tv {
+        --x-bg: #211a15; --x-cream: #f3eadc; --x-gold: #c99660;
+        --x-serif: "Cormorant Garamond", "Cormorant", Georgia, "Times New Roman", serif;
+        --x-sans: "Geist", var(--sans), "Helvetica Neue", Arial, sans-serif;
+        position: absolute; left: 50%; top: 50%; width: 1920px; height: 1080px; overflow: hidden;
+        transform: translate(-50%, -50%) scale(0.5); transform-origin: 50% 50%;
+        background: var(--x-bg); color: var(--x-cream); font-family: var(--x-sans);
+        max-width: none; min-height: 0; margin: 0; padding: 0; box-sizing: border-box;
+      }
+      .x-photo { position: absolute; top: 0; left: 0; width: 1114px; height: 1080px; }
+      .x-photo__img { width: 100%; height: 100%; max-width: none; object-fit: cover; display: block; }
+      .x-photo::after {
+        content: ""; position: absolute; top: 0; right: 0; bottom: 0; left: 0;
+        background: linear-gradient(90deg, rgba(33,26,21,0) 0%, rgba(33,26,21,0) 55%, rgba(33,26,21,.55) 78%, #211a15 100%),
+                    linear-gradient(0deg, rgba(33,26,21,.55) 0%, rgba(33,26,21,0) 35%);
+      }
+      .x-insets { position: absolute; left: 58px; bottom: 54px; width: 922px; display: flex; justify-content: space-between; align-items: flex-end; z-index: 2; }
+      .x-inset { margin: 0; width: 212px; background: var(--x-cream); padding: 8px; border-radius: 6px; box-shadow: 0 13px 32px rgba(0,0,0,.45); box-sizing: border-box; }
+      .x-inset img { display: block; width: 100%; height: 261px; object-fit: cover; border-radius: 3px 3px 0 0; }
+      .x-inset figcaption { background: rgba(33,26,21,.88); color: var(--x-cream); font: 500 24px/1.1 var(--x-sans); letter-spacing: .04em; text-transform: uppercase; text-align: center; padding: 10px 4px; border-radius: 0 0 3px 3px; overflow-wrap: anywhere; }
+
+      .x-panel {
+        position: absolute; top: 0; right: 0; width: 864px; height: 1080px; box-sizing: border-box;
+        padding: 64px 86px 52px 58px; display: flex; flex-direction: column; z-index: 1; overflow: hidden;
+      }
+      .x-kicker { margin: 0; font: 600 24px/1 var(--x-sans); letter-spacing: .3em; text-transform: uppercase; color: var(--x-gold); }
+      .x-headline {
+        margin: 22px 0 0; font: 500 116px/1 var(--x-serif); color: var(--x-cream); letter-spacing: -.01em;
+        white-space: nowrap; overflow: hidden;
+        opacity: 0; animation: x-fade 3.5s ease-out .4s forwards;
+      }
+      @keyframes x-fade { from { opacity: 0; } to { opacity: 1; } }
+      @media (prefers-reduced-motion: reduce) { .x-headline { animation: none; opacity: 1; } }
+      .x-tagline { margin: 24px 0 0; font: 500 24px/1 var(--x-sans); letter-spacing: .4em; color: var(--x-cream); opacity: .85; }
+      .x-tagline span { color: var(--x-gold); padding: 0 .5em; }
+      .x-rule { width: 115px; height: 3px; background: var(--x-gold); border: 0; margin: 30px 0 22px; }
+      .x-lead { margin: 0; font: italic 500 38px/1.25 var(--x-serif); color: var(--x-cream); }
+      .x-stay { margin: 20px 0 0; font: 400 24px/1.5 var(--x-sans); color: var(--x-cream); opacity: .9; }
+      .x-stay b { color: var(--x-gold); font-weight: 500; }
+      .x-stay[hidden], .x-stay span[hidden] { display: none; }
+      .x-sep { color: var(--x-gold); padding: 0 .6em; }
+
+      /* QR: 324px of a 1080px stage = 30% of screen height, never allowed to shrink. */
+      .x-guide { margin-top: auto; padding-top: 20px; display: flex; align-items: center; gap: 44px; flex: none; }
+      .x-qr { flex: none; width: 324px; height: 324px; box-sizing: border-box; padding: 22px; background: #fff; border-radius: 22px; box-shadow: 0 13px 32px rgba(0,0,0,.35); }
+      .x-qr img { display: block; width: 280px; height: 280px; max-width: none; image-rendering: pixelated; image-rendering: crisp-edges; }
+      .x-guide__title { margin: 0 0 16px; font: 600 41px/1.1 var(--x-serif); color: var(--x-cream); }
+      .x-guide__list { list-style: none; margin: 0; padding: 0; font: 400 24px/1.65 var(--x-sans); color: var(--x-cream); opacity: .9; }
+      .x-guide__list li::before { content: ""; display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: var(--x-gold); margin-right: 12px; vertical-align: middle; }
+
+      .x-clock { flex: none; margin: 34px 0 0; padding-top: 20px; border-top: 1px solid rgba(201,150,96,.35); display: flex; align-items: baseline; justify-content: space-between; }
+      .x-clock__time { font: 500 43px/1 var(--x-serif); color: var(--x-cream); }
+      .x-clock__label { font: 500 24px/1 var(--x-sans); letter-spacing: .28em; text-transform: uppercase; color: var(--x-gold); }
+    </style>
+  </head>
+  <body>
+    <div class="page x-tv" id="top">
+      <div class="x-photo">
+        <img class="x-photo__img" src="photo3.jpeg" alt="Guest bedroom with leaf wallpaper and warm lamps" />
+      </div>
+      <div class="x-insets">
+        <figure class="x-inset"><img src="hi_13.jpg" alt="Living room with sofa and macrame wall art" /><figcaption>Living room</figcaption></figure>
+        <figure class="x-inset"><img src="hi_39.jpg" alt="Bedroom window with the Makati skyline at night" /><figcaption>City view</figcaption></figure>
+        <figure class="x-inset"><img src="hi_35.jpg" alt="Dining nook with place settings" /><figcaption>Dining nook</figcaption></figure>
+        <figure class="x-inset"><img src="hi_57.jpg" alt="Air Residences resort pool" /><figcaption>Pool</figcaption></figure>
+      </div>
+
+      <main class="x-panel">
+        <p class="x-kicker">Welcome to Balay Nam-ay</p>
+        <h1 class="x-headline" id="x-headline">Welcome home</h1>
+        <p class="x-tagline">PAUSE<span>|</span>BREATHE<span>|</span>BELONG</p>
+        <hr class="x-rule" />
+        <p class="x-lead">We're so glad you're here. Make yourself at home.</p>
+        <p class="x-stay" id="x-stay" hidden>
+          <span id="x-stay-dates" hidden><b>Your stay:</b> <span id="x-dates"></span></span><span class="x-sep" id="x-stay-sep" hidden>·</span><span id="x-stay-out" hidden><b>Checkout</b> <span id="x-checkout"></span></span>
+        </p>
+
+        <section class="x-guide" aria-label="Local guide">
+          <div class="x-qr"><img width="280" height="280" alt="QR code for the Balay Nam-ay guest guide" src="data:image/png;base64,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" /></div>
+          <div>
+            <p class="x-guide__title">Scan for the guest guide</p>
+            <ul class="x-guide__list">
+              <li>Restaurants</li>
+              <li>Bars &amp; rooftops</li>
+              <li>Speakeasies</li>
+              <li>Cafes</li>
+              <li>Essentials &amp; services</li>
+            </ul>
+          </div>
+        </section>
+
+        <div class="x-clock">
+          <span class="x-clock__time" id="x-clock"></span>
+          <span class="x-clock__label">Manila time</span>
+        </div>
+      </main>
+    </div>
+    <script src="hark.js"></script>
+    <script>
+      // === GUEST CONFIG: edit only this block ===
+      const GUEST = { firstName: "Rigor", stayDates: "Oct 28 – Nov 5", checkout: "Thu, Nov 5, 12:00 PM" };
+      // === END GUEST CONFIG ===
+
+      (function () {
+        var clean = function (v) { return typeof v === "string" ? v.trim() : ""; };
+        var name = clean(GUEST.firstName), dates = clean(GUEST.stayDates), out = clean(GUEST.checkout);
+        var $ = function (id) { return document.getElementById(id); };
+
+        $("x-headline").textContent = name ? "Welcome, " + name : "Welcome home";
+        if (dates) { $("x-dates").textContent = dates; $("x-stay-dates").hidden = false; }
+        if (out) { $("x-checkout").textContent = out; $("x-stay-out").hidden = false; }
+        if (dates && out) $("x-stay-sep").hidden = false;
+        if (dates || out) $("x-stay").hidden = false;
+
+        var dateFmt, timeFmt;
+        try {
+          dateFmt = new Intl.DateTimeFormat("en-US", { timeZone: "Asia/Manila", weekday: "short", month: "short", day: "numeric" });
+          timeFmt = new Intl.DateTimeFormat("en-US", { timeZone: "Asia/Manila", hour: "numeric", minute: "2-digit", hour12: true });
+        } catch (e) {
+          dateFmt = timeFmt = null;
+        }
+        function tick() {
+          var now = new Date();
+          if (dateFmt) {
+            $("x-clock").textContent = dateFmt.format(now) + " · " + timeFmt.format(now);
+          } else {
+            // Fallback: Manila is UTC+8 with no daylight saving.
+            var m = new Date(now.getTime() + 8 * 3600 * 1000);
+            var days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"], mons = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+            var h = m.getUTCHours(), mm = ("0" + m.getUTCMinutes()).slice(-2);
+            $("x-clock").textContent = days[m.getUTCDay()] + ", " + mons[m.getUTCMonth()] + " " + m.getUTCDate() + " · " + ((h % 12) || 12) + ":" + mm + (h < 12 ? " AM" : " PM");
+          }
+        }
+        tick();
+        setInterval(tick, 30000);
+
+        // Reload every 15 minutes so the TV picks up config edits.
+        setTimeout(function () { location.reload(); }, 15 * 60 * 1000);
+      })();
+    </script>
+    <script>
+      // 16:9 stage: scale the 1920x1080 layout by min(vw/1920, vh/1080), centered and letterboxed.
+      (function () {
+        var stage = document.getElementById("top");
+        var head = document.getElementById("x-headline");
+        function fitStage() {
+          var de = document.documentElement;
+          var w = window.innerWidth || de.clientWidth, h = window.innerHeight || de.clientHeight;
+          var s = Math.min(w / 1920, h / 1080);
+          var t = "translate(-50%, -50%) scale(" + s + ")";
+          stage.style.webkitTransform = t;
+          stage.style.transform = t;
+        }
+        // Keep a long guest name on one line by shrinking it to the panel width.
+        function fitHeadline() {
+          var size = 116;
+          head.style.fontSize = size + "px";
+          while (head.scrollWidth > head.clientWidth && size > 56) {
+            size -= 2;
+            head.style.fontSize = size + "px";
+          }
+        }
+        function fitAll() { fitStage(); fitHeadline(); }
+        fitAll();
+        window.addEventListener("resize", fitAll);
+        window.addEventListener("orientationchange", fitAll);
+        window.addEventListener("load", fitAll);
+        if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitAll);
+      })();
+    </script>
+  </body>
+</html>
